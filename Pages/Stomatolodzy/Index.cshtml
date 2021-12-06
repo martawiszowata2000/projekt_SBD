@@ -1,0 +1,48 @@
+﻿@page
+@model projekt_SBD.Pages.Stomatolodzy.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Stomatolog[0].Imie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stomatolog[0].DrugieImie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stomatolog[0].Nazwisko)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Stomatolog) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Imie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DrugieImie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nazwisko)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.StomatologId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.StomatologId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.StomatologId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
