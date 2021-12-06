@@ -1,11 +1,12 @@
 ﻿@page
 @model projekt_SBD.Pages.Wizyty.CreateModel
 
+
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Dodaj";
 }
 
-<h1>Create</h1>
+<h1>Dodaj</h1>
 
 <h4>Wizyta</h4>
 <hr />
@@ -14,16 +15,16 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Wizyta.PacjentId" class="control-label"></label>
-                <select asp-for="Wizyta.PacjentId" class ="form-control" asp-items="ViewBag.PacjentId"></select>
+                <label  class="control-label">Pacjent: </label>
+                <select name="PacjentId" asp-items="Model.Pacjent_Options"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Wizyta.StomatologId" class="control-label"></label>
-                <select asp-for="Wizyta.StomatologId" class ="form-control" asp-items="ViewBag.StomatologId"></select>
+                <label  class="control-label">Stomatolog: </label>
+                <select name="StomatologId" asp-items="Model.Stomatolog_Options"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Wizyta.AsystentId" class="control-label"></label>
-                <select asp-for="Wizyta.AsystentId" class ="form-control" asp-items="ViewBag.AsystentId"></select>
+                <label class="control-label">Asystent: </label>
+                <select name="AsystentId" asp-items="Model.Asystent_Options"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Wizyta.DataGodzina" class="control-label"></label>
@@ -31,14 +32,14 @@
                 <span asp-validation-for="Wizyta.DataGodzina" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Dodaj" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="Index">Powrót</a>
 </div>
 
 @section Scripts {
