@@ -25,5 +25,30 @@ namespace projekt_SBD.Pages.Asystenci
         {
             Asystent = await _context.Asystenci.ToListAsync();
         }
+
+        [BindProperty(SupportsGet = true)]
+        public string Wyszukiwanie { get; set; }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (ModelState.IsValid)
+            {
+                if (Wyszukiwanie != null)
+                {
+                    var asystenci = from Asystent in _context.Asystenci
+                                   where (Asystent.Imie.ToLower().Contains(Wyszukiwanie.ToLower())) || (Asystent.DrugieImie.ToLower().Contains(Wyszukiwanie.ToLower()))
+                                   || (Asystent.Nazwisko.ToLower().Contains(Wyszukiwanie.ToLower()))
+                                   orderby Asystent.Nazwisko
+                                   select Asystent;
+                    Asystent = asystenci.ToList();
+                }
+                else
+                {
+                    Asystent = await _context.Asystenci.ToListAsync();
+
+                }
+            }
+            return Page();
+        }
     }
 }

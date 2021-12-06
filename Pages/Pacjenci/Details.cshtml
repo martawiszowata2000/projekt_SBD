@@ -1,0 +1,43 @@
+﻿@page
+@model projekt_SBD.Pages.Pacjenci.DetailsModel
+
+@{
+    ViewData["Title"] = "Szczegóły";
+}
+
+<h1>Szczegóły</h1>
+
+<div>
+    <h4>Pacjent</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Imię
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pacjent.Imie)
+        </dd>
+        <dt class="col-sm-2">
+            Nazwisko
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pacjent.Nazwisko)
+        </dd>
+        <dt class="col-sm-2">
+            Numer telefonu
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pacjent.NumerTelefonu)
+        </dd>
+        <dt class="col-sm-2">
+            Nr PESEL
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pacjent.PESEL)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Pacjent.PacjentId">Edytuj</a> |
+    <a asp-page="./Index">Wróć</a>
+</div>

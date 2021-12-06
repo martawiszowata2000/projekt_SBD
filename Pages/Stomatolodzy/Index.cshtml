@@ -2,25 +2,34 @@
 @model projekt_SBD.Pages.Stomatolodzy.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Stomatolodzy";
 }
 
-<h1>Index</h1>
+<h1>Stomatolodzy</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">Nowy profil stomatologa</a>
 </p>
+<form method="post" class="row g-8">
+    <div class="col-auto">
+        <input asp-for="Wyszukiwanie" class="form-control" id="Szukanie" placeholder="Imię, nazwisko...">
+    </div>
+    <div class="col-auto">
+
+        <button class="btn btn-primary" type="submit">Szukaj</button>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Stomatolog[0].Imie)
+                Nazwisko
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stomatolog[0].DrugieImie)
+                Imię
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Stomatolog[0].Nazwisko)
+                Drugie imię
             </th>
             <th></th>
         </tr>
@@ -29,18 +38,19 @@
 @foreach (var item in Model.Stomatolog) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Nazwisko)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Imie)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DrugieImie)
             </td>
+
             <td>
-                @Html.DisplayFor(modelItem => item.Nazwisko)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.StomatologId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.StomatologId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.StomatologId">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.StomatologId">Edytuj</a> |
+                <a asp-page="./Details" asp-route-id="@item.StomatologId">Szczegóły</a> |
+                <a asp-page="./Delete" asp-route-id="@item.StomatologId">Usuń</a>
             </td>
         </tr>
 }
