@@ -2,12 +2,12 @@
 @model projekt_SBD.Pages.Wizyty.DeleteModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Usuń";
 }
 
-<h1>Delete</h1>
+<h1>Usuń</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Czy naewno chcesz to usunąć ?</h3>
 <div>
     <h4>Wizyta</h4>
     <hr />
@@ -22,7 +22,7 @@
     
     <form method="post">
         <input type="hidden" asp-for="Wizyta.WizytaId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
+        <input type="submit" value="Usuń" class="btn btn-danger" /> |
+        <a asp-page="./Index">Powrót</a>
     </form>
 </div>

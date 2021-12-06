@@ -1,0 +1,34 @@
+﻿@page
+@model projekt_SBD.Pages.Uslugi.DeleteModel
+
+@{
+    ViewData["Title"] = "Usuń";
+}
+
+<h1>Usuń</h1>
+
+<h3>Czy napewno chcesz to usunąć ?</h3>
+<div>
+    <h4>Usługa</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Usluga.UslugaNazwa)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Usluga.UslugaNazwa)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Usluga.Cena)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Usluga.Cena)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Usluga.UslugaId" />
+        <input type="submit" value="Usuń" class="btn btn-danger" /> |
+        <a asp-page="./Index">Powrót</a>
+    </form>
+</div>

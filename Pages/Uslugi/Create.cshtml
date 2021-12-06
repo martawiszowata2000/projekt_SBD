@@ -1,0 +1,39 @@
+﻿@page
+@model projekt_SBD.Pages.Uslugi.CreateModel
+
+@{
+    ViewData["Title"] = "Dodaj usługe";
+}
+
+<h1>Dodaj usługę</h1>
+
+<h4>Usługa</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Usluga.UslugaNazwa" class="control-label"></label>
+                <input asp-for="Usluga.UslugaNazwa" class="form-control" />
+                <span asp-validation-for="Usluga.UslugaNazwa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Usluga.Cena" class="control-label"></label>
+                <input asp-for="Usluga.Cena" type="number" step="0.01" class="form-control" />
+                <span asp-validation-for="Usluga.Cena" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Dodaj" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Powrót</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

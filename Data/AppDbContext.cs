@@ -34,7 +34,7 @@ namespace projekt_SBD.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                IConfigurationRoot configuration = new ConfigurationBuilder().SetBasePath("C:\\Users\\mgdle\\Documents\\GitHub\\projektbazki\\projekt_SBD")
+                IConfigurationRoot configuration = new ConfigurationBuilder().SetBasePath("C:\\Users\\User\\source\\repos\\martawiszowata2000\\projekt_SBD")
                    .AddJsonFile("appsettings.json")
                    .Build();
                 var connectionString = configuration.GetConnectionString("ProjektDB");

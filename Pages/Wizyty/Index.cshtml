@@ -2,13 +2,13 @@
 @model projekt_SBD.Pages.Wizyty.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Wizyty";
 }
 
-<h1>Index</h1>
+<h1>Wizyty</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">Dodaj wizytę</a>
 </p>
 <table class="table">
     <thead>
@@ -26,9 +26,9 @@
                 @Html.DisplayFor(modelItem => item.DataGodzina)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.WizytaId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.WizytaId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.WizytaId">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.WizytaId">Edytuj</a> |
+                <a asp-page="./Details" asp-route-id="@item.WizytaId">Szczegóły</a> |
+                <a asp-page="./Delete" asp-route-id="@item.WizytaId">Usuń</a>
             </td>
         </tr>
 }

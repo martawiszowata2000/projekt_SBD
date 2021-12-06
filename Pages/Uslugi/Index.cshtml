@@ -1,0 +1,54 @@
+﻿@page
+@model projekt_SBD.Pages.Uslugi.IndexModel
+
+@{
+    ViewData["Title"] = "Usługi";
+}
+
+<h1>Usługi</h1>
+
+<p>
+    <a asp-page="Create">Dodaj Usługę</a>
+</p>
+
+<form method="post" class="row g-4">
+    <div class="col-auto">
+        <input asp-for="Wyszukiwanie" class="form-control" id="Szukanie" placeholder="np. Znieczulenie">
+    </div>
+    <div class="col-auto">
+
+        <button class="btn btn-primary" type="submit">Szukaj</button>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NazwaSort">
+                @Html.DisplayNameFor(model => model.Usluga[0].UslugaNazwa)
+                    </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usluga[0].Cena)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Usluga) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UslugaNazwa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cena)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.UslugaId">Edytuj</a> |
+                <a asp-page="./Delete" asp-route-id="@item.UslugaId">Usuń</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
