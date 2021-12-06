@@ -8,43 +8,40 @@ using Microsoft.EntityFrameworkCore;
 using projekt_SBD.Data;
 using projekt_SBD.Models;
 
-namespace projekt_SBD.Pages.Asystenci
+namespace projekt_SBD.Pages.Uczulenia
 {
     public class IndexModel : PageModel
     {
         private readonly projekt_SBD.Data.AppDbContext _context;
+        [BindProperty(SupportsGet = true)]
+        public string Wyszukiwanie { get; set; }
 
         public IndexModel(projekt_SBD.Data.AppDbContext context)
         {
             _context = context;
         }
 
-        public IList<Asystent> Asystent { get;set; }
+        public IList<Uczulenie> Uczulenie { get;set; }
 
         public async Task OnGetAsync()
         {
-            Asystent = await _context.Asystenci.ToListAsync();
+            Uczulenie = await _context.Uczulenia.ToListAsync();
         }
-
-        [BindProperty(SupportsGet = true)]
-        public string Wyszukiwanie { get; set; }
-
         public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid)
             {
                 if (Wyszukiwanie != null)
                 {
-                    var asystenci = from Asystent in _context.Asystenci
-                                   where (Asystent.Imie.ToLower().Contains(Wyszukiwanie.ToLower())) || (Asystent.DrugieImie.ToLower().Contains(Wyszukiwanie.ToLower()))
-                                   || (Asystent.Nazwisko.ToLower().Contains(Wyszukiwanie.ToLower()))
-                                   orderby Asystent.Nazwisko
-                                   select Asystent;
-                    Asystent = asystenci.ToList();
+                    var uczulenia = from Uczulenie in _context.Uczulenia
+                                    where (Uczulenie.NazwaAlergenu.ToLower().Contains(Wyszukiwanie.ToLower()))
+                                    orderby Uczulenie.NazwaAlergenu
+                                    select Uczulenie;
+                    Uczulenie = uczulenia.ToList();
                 }
                 else
                 {
-                    Asystent = await _context.Asystenci.ToListAsync();
+                    Uczulenie = await _context.Uczulenia.ToListAsync();
 
                 }
             }

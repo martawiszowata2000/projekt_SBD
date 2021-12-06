@@ -1,0 +1,63 @@
+﻿@page
+@model projekt_SBD.Pages.Pacjenci.IndexModel
+
+@{
+    ViewData["Title"] = "Pacjenci";
+}
+
+<h1>Pacjenci</h1>
+
+<p>
+    <a asp-page="Create">Nowy profil pacjenta</a>
+</p>
+<form method="post" class="row g-8">
+    <div class="col-auto">
+        <input asp-for="Wyszukiwanie" class="form-control" id="Szukanie" placeholder="Imię, nazwisko, nr telefonu lub PESEL...">
+    </div>
+    <div class="col-auto">
+
+        <button class="btn btn-primary" type="submit">Szukaj</button>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Imię
+            </th>
+            <th>
+                Nazwisko
+            </th>
+            <th>
+                Numer telefonu
+            </th>
+            <th>
+                Nr PESEL
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Pacjent) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Imie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nazwisko)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumerTelefonu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PESEL)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.PacjentId">Edytuj</a> |
+                <a asp-page="./Details" asp-route-id="@item.PacjentId">Szczegóły</a> |
+                <a asp-page="./Delete" asp-route-id="@item.PacjentId">Usuń</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -2,10 +2,10 @@
 @model projekt_SBD.Pages.Stomatolodzy.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Nowy stomatolog";
 }
 
-<h1>Create</h1>
+<h1>Utwórz nowy profil stomatologa</h1>
 
 <h4>Stomatolog</h4>
 <hr />
@@ -14,29 +14,29 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Stomatolog.Imie" class="control-label"></label>
+                <label asp-for="Stomatolog.Imie" class="control-label">Imię</label>
                 <input asp-for="Stomatolog.Imie" class="form-control" />
                 <span asp-validation-for="Stomatolog.Imie" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Stomatolog.DrugieImie" class="control-label"></label>
+                <label asp-for="Stomatolog.DrugieImie" class="control-label">Drugie imię</label>
                 <input asp-for="Stomatolog.DrugieImie" class="form-control" />
                 <span asp-validation-for="Stomatolog.DrugieImie" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Stomatolog.Nazwisko" class="control-label"></label>
+                <label asp-for="Stomatolog.Nazwisko" class="control-label">Nazwisko</label>
                 <input asp-for="Stomatolog.Nazwisko" class="form-control" />
                 <span asp-validation-for="Stomatolog.Nazwisko" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Utwórz" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="Index">Wróć</a>
 </div>
 
 @section Scripts {

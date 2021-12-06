@@ -1,0 +1,49 @@
+﻿@page
+@model projekt_SBD.Pages.Pacjenci.CreateModel
+
+@{
+    ViewData["Title"] = "Nowy pacjent";
+}
+
+<h1>Utwórz nowy profil pacjenta</h1>
+
+<h4>Pacjent</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Pacjent.Imie" class="control-label">Imię:</label>
+                <input asp-for="Pacjent.Imie" class="form-control" />
+                <span asp-validation-for="Pacjent.Imie" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pacjent.Nazwisko" class="control-label">Nazwisko:</label>
+                <input asp-for="Pacjent.Nazwisko" class="form-control" />
+                <span asp-validation-for="Pacjent.Nazwisko" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pacjent.NumerTelefonu" class="control-label">Numer telefonu:</label>
+                <input asp-for="Pacjent.NumerTelefonu" class="form-control" />
+                <span asp-validation-for="Pacjent.NumerTelefonu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pacjent.PESEL" class="control-label">Nr PESEL:</label>
+                <input asp-for="Pacjent.PESEL" class="form-control" />
+                <span asp-validation-for="Pacjent.PESEL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Utwórz" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Wróć</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
