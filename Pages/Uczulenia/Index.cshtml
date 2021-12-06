@@ -1,0 +1,44 @@
+﻿@page
+@model projekt_SBD.Pages.Uczulenia.IndexModel
+
+@{
+    ViewData["Title"] = "Spis uczuleń";
+}
+
+<h1>Spis uczuleń</h1>
+
+<p>
+    <a asp-page="Create">Dodaj nowe uczulenie</a>
+</p>
+<form method="post" class="row g-4">
+    <div class="col-auto">
+        <input asp-for="Wyszukiwanie" class="form-control" id="Szukanie" placeholder="np. Nikiel">
+    </div>
+    <div class="col-auto">
+
+        <button class="btn btn-primary" type="submit">Szukaj</button>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nazwa
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Uczulenie) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NazwaAlergenu)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.UczulenieId">Edytuj</a> |
+                <a asp-page="./Delete" asp-route-id="@item.UczulenieId">Usuń</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

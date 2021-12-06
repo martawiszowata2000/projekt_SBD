@@ -1,0 +1,27 @@
+﻿@page
+@model projekt_SBD.Pages.Choroby.DeleteModel
+
+@{
+    ViewData["Title"] = "Usuwanie";
+}
+
+<h1>Usuwanie</h1>
+
+<h3>Na pewno chcesz usunąć tę chorobę?</h3>
+<div>
+    <hr />
+    <dl class="col">
+        <dt class="row">
+            Nazwa
+        </dt>
+        <dd class="row">
+            @Html.DisplayFor(model => model.Choroba.NazwaChoroby)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Choroba.ChorobaId" />
+        <input type="submit" value="Usuń" class="btn btn-danger" /> |
+        <a asp-page="./Index">Wróć do listy</a>
+    </form>
+</div>
