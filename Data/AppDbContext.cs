@@ -30,17 +30,17 @@ namespace projekt_SBD.Data
         public DbSet<PacjentChoroba> PacjenciChoroby { get; set; }
         public DbSet<PacjentUczulenie> PacjenciUczulenia { get; set; }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    if (!optionsBuilder.IsConfigured)
-        //    {
-        //        IConfigurationRoot configuration = new ConfigurationBuilder().SetBasePath("C:\\Users\\marta\\source\\repos\\projekt_SBD")
-        //           .AddJsonFile("appsettings.json")
-        //           .Build();
-        //        var connectionString = configuration.GetConnectionString("ProjektDB");
-        //        optionsBuilder.UseSqlServer(connectionString);
-        //    }
-        //}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                IConfigurationRoot configuration = new ConfigurationBuilder().SetBasePath("C:\\Users\\mgdle\\Documents\\GitHub\\projektbazki\\projekt_SBD")
+                   .AddJsonFile("appsettings.json")
+                   .Build();
+                var connectionString = configuration.GetConnectionString("ProjektDB");
+                optionsBuilder.UseSqlServer(connectionString);
+            }
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Asystent>().HasKey(m => m.AsystentId);

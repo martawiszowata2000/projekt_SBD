@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using projekt_SBD.Data;
 using projekt_SBD.Models;
 
-namespace projekt_SBD.Pages.Stomatolodzy
+namespace projekt_SBD.Pages.Pacjenci
 {
     public class IndexModel : PageModel
     {
@@ -19,11 +19,11 @@ namespace projekt_SBD.Pages.Stomatolodzy
             _context = context;
         }
 
-        public IList<Stomatolog> Stomatolog { get;set; }
+        public IList<Pacjent> Pacjent { get;set; }
 
         public async Task OnGetAsync()
         {
-            Stomatolog = await _context.Stomatolodzy.ToListAsync();
+            Pacjent = await _context.Pacjenci.ToListAsync();
         }
 
         [BindProperty(SupportsGet = true)]
@@ -35,20 +35,21 @@ namespace projekt_SBD.Pages.Stomatolodzy
             {
                 if (Wyszukiwanie != null)
                 {
-                    var stomatolodzy = from Stomatolog in _context.Stomatolodzy
-                                       where (Stomatolog.Imie.ToLower().Contains(Wyszukiwanie.ToLower())) || (Stomatolog.DrugieImie.ToLower().Contains(Wyszukiwanie.ToLower()))
-                                   || (Stomatolog.Nazwisko.ToLower().Contains(Wyszukiwanie.ToLower()))
-                                   orderby Stomatolog.Nazwisko
-                                   select Stomatolog;
-                    Stomatolog = stomatolodzy.ToList();
+                    var pacjenci = from Pacjent in _context.Pacjenci
+                                  where (Pacjent.Imie.ToLower().Contains(Wyszukiwanie.ToLower())) || (Pacjent.Nazwisko.ToLower().Contains(Wyszukiwanie.ToLower()))
+                                  || (Pacjent.NumerTelefonu.ToString().Contains(Wyszukiwanie.ToLower())) || (Pacjent.PESEL.ToString().Contains(Wyszukiwanie.ToLower()))
+                                   orderby Pacjent.Nazwisko
+                                  select Pacjent;
+                    Pacjent = pacjenci.ToList();
                 }
                 else
                 {
-                    Stomatolog = await _context.Stomatolodzy.ToListAsync();
+                    Pacjent = await _context.Pacjenci.ToListAsync();
 
                 }
             }
             return Page();
         }
+        
     }
 }
