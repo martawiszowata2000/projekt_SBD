@@ -25,16 +25,27 @@ namespace projekt_SBD.Pages.Uslugi
         public IList<Usluga> Usluga { get;set; }
 
         public string NazwaSort { get; set; }
+        public string CenaSort { get; set; }
+
 
         public async Task OnGetAsync(string sortOrder)
         {
             NazwaSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            if (String.IsNullOrEmpty(sortOrder)) CenaSort = "cena_desc";
+            else if (sortOrder == "cena_desc") CenaSort = "cena_asc";
+            else CenaSort = "";
             Usluga = await _context.Uslugi.ToListAsync();
 
             switch (sortOrder)
             {
                 case "name_desc":
                     Usluga = Usluga.OrderByDescending(s => s.UslugaNazwa).ToList();
+                    break;
+                case "cena_desc":
+                    Usluga = Usluga.OrderByDescending(s => s.Cena).ToList();
+                    break;
+                case "cena_asc":
+                    Usluga = Usluga.OrderBy(s => s.Cena).ToList();
                     break;
                 default:
                     Usluga = Usluga.OrderBy(s => s.UslugaNazwa).ToList();
