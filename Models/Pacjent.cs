@@ -20,13 +20,11 @@ namespace projekt_SBD.Models
         [Required]
         public string Nazwisko { get; set; }
 
-        [Range(100000000,99999999999)]
         [Required]
-        public int NumerTelefonu { get; set; }
+        public string NumerTelefonu { get; set; }
 
-        [Range(0, 99999999999)]
         [Required]
-        public int PESEL { get; set; }
+        public string PESEL { get; set; }
         public ICollection<PacjentChoroba> PacjenciChoroby { get; set; }
         public ICollection<PacjentUczulenie> PacjenciUczulenia { get; set; }
 
