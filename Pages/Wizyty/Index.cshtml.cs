@@ -30,11 +30,15 @@ namespace projekt_SBD.Pages.Wizyty
         public string NazwaSort { get; set; }
 
         [BindProperty]
-        public Pacjent Pacjent { get; set; }
+        public  Pacjent Pacjent { get; set; }
+        private static int pid = 0;
+        private static int sid = 0;
+        private static int aid = 0;
+
         [BindProperty]
-        public Stomatolog Stomatolog { get; set; }
+        public  Stomatolog Stomatolog { get; set; }
         [BindProperty]
-        public Asystent Asystent { get; set; }
+        public  Asystent Asystent { get; set; }
         public void PrepareOptions()
         {
             Pacjent_Options = _context.Pacjenci.Select(a =>
@@ -57,6 +61,7 @@ namespace projekt_SBD.Pages.Wizyty
                                       Value = a.AsystentId.ToString(),
                                       Text = a.Imie + " " + a.DrugieImie + " " + a.Nazwisko
                                   }).ToList();
+            
             Pacjent_Options.Insert(0, new SelectListItem
             {
                 Value = null,
@@ -73,31 +78,10 @@ namespace projekt_SBD.Pages.Wizyty
                 Text = "--------------"
             });
         }
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string sortOrder)
         {
             Wizyty = await _context.Wizyty.ToListAsync();
-            PrepareOptions();
-        }
-        public async Task<IActionResult> OnPostAsync(string sortOrder)
-        {
-            Wizyty = await _context.Wizyty.ToListAsync();
-
-            if (Pacjent.PacjentId != 0)
-            {
-                Wizyty = Wizyty.Where(w => w.PacjentId == Pacjent.PacjentId).ToList();
-            }
-            if (Asystent.AsystentId != 0)
-            {
-                Wizyty = Wizyty.Where(w => w.AsystentId == Asystent.AsystentId).ToList();
-            }
-            if (Stomatolog.StomatologId != 0)
-            {
-                Wizyty = Wizyty.Where(w => w.StomatologId == Stomatolog.StomatologId).ToList();
-            }
-
-            PrepareOptions();
-
-            
+            Wizyty = Filter();
 
             NazwaSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
@@ -110,18 +94,63 @@ namespace projekt_SBD.Pages.Wizyty
                     Wizyty = Wizyty.OrderBy(d => d.DataGodzina).ToList();
                     break;
             }
+            PrepareOptions();
+        }
+        public async Task<IActionResult> OnPostAsync()
+        {
+            Wizyty = await _context.Wizyty.ToListAsync();
+            Wizyty = Filter();
 
+            PrepareOptions();
             return Page();
 
-
         }
-
-        public Pacjent GetPacjent()
+        public IList<Wizyta> Filter()
         {
-            Pacjent p = new Pacjent();
 
-            return p;
+            if (Pacjent != null)
+            {
+                pid = Pacjent.PacjentId;
+            }
+            if (Stomatolog != null)
+            {
+                sid = Stomatolog.StomatologId;
+            }
+            if (Asystent != null)
+            {
+                aid = Asystent.AsystentId;
+            }
+            if (pid != 0)
+                {
+                    Wizyty = Wizyty.Where(w => w.PacjentId == pid).ToList();
+                }
+                if (aid != 0)
+                {
+                    Wizyty = Wizyty.Where(w => w.AsystentId == aid).ToList();
+                }
+                if (sid != 0)
+                {
+                    Wizyty = Wizyty.Where(w => w.StomatologId == sid).ToList();
+                }
+            return Wizyty;
         }
-
+        public string GetStomatolog(int id)
+        {
+            Stomatolog s = new Stomatolog();
+            s = _context.Stomatolodzy.Where(s => s.StomatologId == id).FirstOrDefault();
+            return $"{s.Imie} {s.Nazwisko}";
+        }
+        public string GetAsystent(int id)
+        {
+            Asystent s = new Asystent();
+            s = _context.Asystenci.Where(s => s.AsystentId == id).FirstOrDefault();
+            return $"{s.Imie} {s.Nazwisko}";
+        }
+        public string GetPacjent(int id)
+        {
+            Pacjent s = new Pacjent();
+            s = _context.Pacjenci.Where(s => s.PacjentId == id).FirstOrDefault();
+            return $"{s.Imie} {s.Nazwisko}";
+        }
     }
 }

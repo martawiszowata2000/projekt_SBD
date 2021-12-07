@@ -14,5 +14,14 @@ namespace projekt_SBD.Models
         public int AsystentId { get; set;}
         public DateTime DataGodzina { get; set;}
         public ICollection<WizytaUsluga> WizytyUslugi { get; set; }
+        //public string GetStomatolog(int id)
+        //{
+        //    Stomatolog s = new Stomatolog();
+        //    using(var db = new Data.AppDbContext())
+        //    {
+        //        s = db.Stomatolodzy.Where(s => s.StomatologId == id).FirstOrDefault();
+        //    }
+        //    return $"{s.Imie} {s.DrugieImie} {s.Nazwisko}";
+        //}
     }
 }
