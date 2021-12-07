@@ -22,10 +22,20 @@ namespace projekt_SBD.Pages.Uczulenia
         }
 
         public IList<Uczulenie> Uczulenie { get;set; }
-
-        public async Task OnGetAsync()
+        public string NazwaSort { get; set; }
+        public async Task OnGetAsync(string sortOrder)
         {
+            NazwaSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             Uczulenie = await _context.Uczulenia.ToListAsync();
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    Uczulenie = Uczulenie.OrderByDescending(s => s.NazwaAlergenu).ToList();
+                    break;
+                default:
+                    Uczulenie = Uczulenie.OrderBy(s => s.NazwaAlergenu).ToList();
+                    break;
+            }
         }
         public async Task<IActionResult> OnPostAsync()
         {

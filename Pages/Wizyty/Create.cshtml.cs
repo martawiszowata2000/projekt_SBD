@@ -64,10 +64,10 @@ namespace projekt_SBD.Pages.Wizyty
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return Page();
+            //}
 
             Wizyta.PacjentId = Pacjent.PacjentId;
             Wizyta.AsystentId = Asystent.AsystentId;

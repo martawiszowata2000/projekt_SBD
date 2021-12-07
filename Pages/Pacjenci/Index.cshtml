@@ -23,10 +23,10 @@
     <thead>
         <tr>
             <th>
-                Imię
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NazwaSort">Nazwisko</a>
             </th>
             <th>
-                Nazwisko
+                Imię
             </th>
             <th>
                 Numer telefonu
@@ -41,10 +41,10 @@
 @foreach (var item in Model.Pacjent) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Imie)
+                @Html.DisplayFor(modelItem => item.Nazwisko)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Nazwisko)
+                @Html.DisplayFor(modelItem => item.Imie)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NumerTelefonu)
