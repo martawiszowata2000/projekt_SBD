@@ -22,10 +22,21 @@ namespace projekt_SBD.Pages.Choroby
         }
 
         public IList<Choroba> Choroba { get;set; }
+        public string NazwaSort { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string sortOrder)
         {
+            NazwaSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             Choroba = await _context.Choroby.ToListAsync();
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    Choroba = Choroba.OrderByDescending(s => s.NazwaChoroby).ToList();
+                    break;
+                default:
+                    Choroba = Choroba.OrderBy(s => s.NazwaChoroby).ToList();
+                    break;
+            }
         }
         public async Task<IActionResult> OnPostAsync()
         {
