@@ -18,9 +18,6 @@ namespace projekt_SBD.Pages.Wizyty
         public List<SelectListItem> Stomatolog_Options { get; set; }
         public List<SelectListItem> Asystent_Options { get; set; }
 
-        public Pacjent Pacjent { get; set; }
-        public Stomatolog Stomatolog { get; set; }
-        public Asystent Asystent { get; set; }
 
         public IndexModel(projekt_SBD.Data.AppDbContext context)
         {
@@ -30,7 +27,6 @@ namespace projekt_SBD.Pages.Wizyty
         public IList<Wizyta> Wizyty { get;set; }
         [BindProperty]
         public Wizyta Wizyta { get; set; }
-        public IList<Wizyta> Wizyta { get;set; }
         public string NazwaSort { get; set; }
 
         [BindProperty]
@@ -82,7 +78,7 @@ namespace projekt_SBD.Pages.Wizyty
             Wizyty = await _context.Wizyty.ToListAsync();
             PrepareOptions();
         }
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(string sortOrder)
         {
             Wizyty = await _context.Wizyty.ToListAsync();
 
@@ -101,29 +97,30 @@ namespace projekt_SBD.Pages.Wizyty
 
             PrepareOptions();
 
-            return Page();
-            Wizyta = await _context.Wizyty.ToListAsync();
+            
+
             NazwaSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
             switch (sortOrder)
             {
                 case "name_desc":
-                    Wizyta = Wizyta.OrderByDescending(d => d.DataGodzina).ToList();
+                    Wizyty = Wizyty.OrderByDescending(d => d.DataGodzina).ToList();
                     break;
                 default:
-                    Wizyta = Wizyta.OrderBy(d => d.DataGodzina).ToList();
+                    Wizyty = Wizyty.OrderBy(d => d.DataGodzina).ToList();
                     break;
             }
 
-            
+            return Page();
+
 
         }
 
         public Pacjent GetPacjent()
         {
-            Pacjent = 
+            Pacjent p = new Pacjent();
 
-            return 
+            return p;
         }
 
     }
