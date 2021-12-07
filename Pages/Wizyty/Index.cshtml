@@ -52,16 +52,25 @@
     <tbody>
         @foreach (var item in Model.Wizyty)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DataGodzina)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.WizytaId">Edytuj</a> |
-                    <a asp-page="./Details" asp-route-id="@item.WizytaId">Szczegóły</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.WizytaId">Usuń</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataGodzina)
+            </td>
+            <td>
+                @Model.GetStomatolog(item.StomatologId)
+            </td>
+            <td>
+                @Model.GetAsystent(item.AsystentId)
+            </td>
+            <td>
+                @Model.GetPacjent(item.PacjentId)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.WizytaId">Edytuj</a> |
+                <a asp-page="./Details" asp-route-id="@item.WizytaId">Szczegóły</a> |
+                <a asp-page="./Delete" asp-route-id="@item.WizytaId">Usuń</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
