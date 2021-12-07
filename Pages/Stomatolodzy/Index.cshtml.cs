@@ -21,9 +21,23 @@ namespace projekt_SBD.Pages.Stomatolodzy
 
         public IList<Stomatolog> Stomatolog { get;set; }
 
-        public async Task OnGetAsync()
+        public string NazwaSort { get; set; }
+
+        public async Task OnGetAsync(string sortOrder)
         {
+            NazwaSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             Stomatolog = await _context.Stomatolodzy.ToListAsync();
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    Stomatolog = Stomatolog.OrderByDescending(s => s.Nazwisko).ThenBy(s => s.Imie).ToList();
+                    break;
+                default:
+                    Stomatolog = Stomatolog.OrderBy(p => p.Nazwisko).ThenBy(s => s.Imie).ToList();
+                    break;
+            }
+
         }
 
         [BindProperty(SupportsGet = true)]

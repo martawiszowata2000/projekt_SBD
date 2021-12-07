@@ -14,9 +14,17 @@
     <thead>
         <tr>
             <th>
-                Termin
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NazwaSort">Termin</a>
             </th>
-            <th></th>
+            <th>
+                Stomatolog
+            </th>
+            <th>
+                Asystent
+            </th>
+            <th>
+                Pacjent
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -24,6 +32,16 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.DataGodzina)
+            </td>
+             
+            <td>
+              
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.WizytaId">Edytuj</a> |

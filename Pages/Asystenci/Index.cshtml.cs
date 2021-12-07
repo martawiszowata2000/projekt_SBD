@@ -20,10 +20,23 @@ namespace projekt_SBD.Pages.Asystenci
         }
 
         public IList<Asystent> Asystent { get;set; }
+        public string NazwaSort { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string sortOrder)
         {
+            NazwaSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             Asystent = await _context.Asystenci.ToListAsync();
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    Asystent = Asystent.OrderByDescending(s => s.Nazwisko).ThenBy(s => s.Imie).ToList();
+                    break;
+                default:
+                    Asystent = Asystent.OrderBy(s => s.Nazwisko).ThenBy(s => s.Imie).ToList();
+                    break;
+            }
+
         }
 
         [BindProperty(SupportsGet = true)]
