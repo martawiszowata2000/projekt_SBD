@@ -85,7 +85,7 @@ namespace projekt_SBD.Pages.Wizyty
 
             NazwaSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
-            switch (sortOrder)
+                switch (sortOrder)
             {
                 case "name_desc":
                     Wizyty = Wizyty.OrderByDescending(d => d.DataGodzina).ToList();
@@ -100,6 +100,13 @@ namespace projekt_SBD.Pages.Wizyty
         {
             Wizyty = await _context.Wizyty.ToListAsync();
             Wizyty = Filter();
+
+            DateTime searchDate = Convert.ToDateTime(Request.Form["WyszukiwanieData"]);
+
+            if (searchDate != Convert.ToDateTime("01.01.0001 00:00:00"))
+            {
+                Wizyty = Wizyty.Where(w => w.DataGodzina.Date == searchDate.Date).OrderBy(w => w.DataGodzina).ToList();
+            }
 
             PrepareOptions();
             return Page();
