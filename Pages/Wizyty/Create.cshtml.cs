@@ -17,7 +17,8 @@ namespace projekt_SBD.Pages.Wizyty
         public List<SelectListItem> Pacjent_Options { get; set; }
         public List<SelectListItem> Stomatolog_Options { get; set; }
         public List<SelectListItem> Asystent_Options { get; set; }
-
+        public List<Usluga> Usluga_Options { get; set; }
+        public List<Object> IsChecked { get; set; }
 
         public CreateModel(projekt_SBD.Data.AppDbContext context)
         {
@@ -46,6 +47,7 @@ namespace projekt_SBD.Pages.Wizyty
                                       Value = a.AsystentId.ToString(),
                                       Text = a.Imie + " " + a.DrugieImie +  " " + a.Nazwisko
                                   }).ToList();
+            Usluga_Options = _context.Uslugi.ToList();
 
             return Page();
         }
@@ -73,6 +75,12 @@ namespace projekt_SBD.Pages.Wizyty
             Wizyta.AsystentId = Asystent.AsystentId;
             Wizyta.StomatologId = Stomatolog.StomatologId;
 
+            for (int i = 0; i < Usluga_Options.Count(); i++)
+            {
+                Usluga u1 = new Usluga();
+                u1.UslugaNazwa = Usluga_Options[i].UslugaNazwa;
+
+            }
             _context.Wizyty.Add(Wizyta);
             await _context.SaveChangesAsync();
 
