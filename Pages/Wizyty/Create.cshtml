@@ -15,22 +15,38 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label  class="control-label">Pacjent: </label>
-                <p><select name="PacjentId" asp-items="Model.Pacjent_Options"></select></p>
+                <label class="control-label">Pacjent: </label>
+                <select name="PacjentId" asp-items="Model.Pacjent_Options"></select>
             </div>
             <div class="form-group">
-                <label  class="control-label">Stomatolog: </label>
-                <p><select name="StomatologId" asp-items="Model.Stomatolog_Options"></select></p>
+                <label class="control-label">Stomatolog: </label>
+                <select name="StomatologId" asp-items="Model.Stomatolog_Options"></select>
             </div>
             <div class="form-group">
                 <label class="control-label">Asystent: </label>
-                <p><select name="AsystentId" asp-items="Model.Asystent_Options"></select></p>
+                <select name="AsystentId" asp-items="Model.Asystent_Options"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Wizyta.DataGodzina" class="control-label">Data i godzina:</label>
                 <input asp-for="Wizyta.DataGodzina" class="form-control" />
                 <span asp-validation-for="Wizyta.DataGodzina" class="text-danger"></span>
             </div>
+            <div class="container">
+            @foreach (var item in Model.Usluga_Options)
+            {
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"
+                               name="usluga"
+                               value="@item.UslugaNazwa"
+                               id="@item.UslugaId"/>
+                        @item.UslugaNazwa
+
+                    </label>
+                </div>
+            }
+
+        </div>
             <div class="form-group">
                 <input type="submit" value="Dodaj" class="btn btn-primary" />
             </div>
@@ -40,8 +56,23 @@
 
 <div>
     <a asp-page="Index">Powrót</a>
-</div>
+</div> 
+<script>
+    function getSelectedCheckboxValues(name) {
+        const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
+        var values = [];
+        checkboxes.forEach((checkbox) => {
+            values.push(checkbox.value);
+        });
+        return values;
+    }
 
+    const btn = document.querySelector('.btn');
+    btn.addEventListener('click', (event) => {
+        getSelectedCheckboxValues('usluga');
+    });
+
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
