@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using projekt_SBD.Data;
 using projekt_SBD.Models;
@@ -35,6 +36,25 @@ namespace projekt_SBD.Pages.Wizyty
                 return NotFound();
             }
             return Page();
+        }
+
+        public string GetStomatolog(int id)
+        {
+            Stomatolog s = new Stomatolog();
+            s = _context.Stomatolodzy.Where(s => s.StomatologId == id).FirstOrDefault();
+            return $"{s.Imie} {s.Nazwisko}";
+        }
+        public string GetAsystent(int id)
+        {
+            Asystent s = new Asystent();
+            s = _context.Asystenci.Where(s => s.AsystentId == id).FirstOrDefault();
+            return $"{s.Imie} {s.Nazwisko}";
+        }
+        public string GetPacjent(int id)
+        {
+            Pacjent s = new Pacjent();
+            s = _context.Pacjenci.Where(s => s.PacjentId == id).FirstOrDefault();
+            return $"{s.Imie} {s.Nazwisko}";
         }
     }
 }
