@@ -37,6 +37,44 @@
         </dd>
     </dl>
 </div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Uczulenia
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.uczulenia)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NazwaAlergenu)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Choroby
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.choroby)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NazwaChoroby)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Pacjent.PacjentId">Edytuj</a> |
     <a asp-page="./Index">Powrót</a>

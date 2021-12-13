@@ -17,9 +17,8 @@ namespace projekt_SBD.Pages.Wizyty
         public List<SelectListItem> Pacjent_Options { get; set; }
         public List<SelectListItem> Stomatolog_Options { get; set; }
         public List<SelectListItem> Asystent_Options { get; set; }
-        public List<Usluga> Usluga_Options { get; set; }
-        public List<Object> IsChecked { get; set; }
-
+        [BindProperty]
+        public List<Usluga> Usluga_Options { get; set; } //available
         public CreateModel(projekt_SBD.Data.AppDbContext context)
         {
             _context = context;
@@ -48,13 +47,11 @@ namespace projekt_SBD.Pages.Wizyty
                                       Text = a.Imie + " " + a.DrugieImie +  " " + a.Nazwisko
                                   }).ToList();
             Usluga_Options = _context.Uslugi.ToList();
-
             return Page();
         }
 
         [BindProperty]
         public Wizyta Wizyta { get; set; }
-
         [BindProperty]
         public Pacjent Pacjent { get; set; }
         [BindProperty]
@@ -62,25 +59,11 @@ namespace projekt_SBD.Pages.Wizyty
         [BindProperty]
         public Asystent Asystent { get; set; }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
-
             Wizyta.PacjentId = Pacjent.PacjentId;
             Wizyta.AsystentId = Asystent.AsystentId;
             Wizyta.StomatologId = Stomatolog.StomatologId;
-
-            for (int i = 0; i < Usluga_Options.Count(); i++)
-            {
-                Usluga u1 = new Usluga();
-                u1.UslugaNazwa = Usluga_Options[i].UslugaNazwa;
-
-            }
             _context.Wizyty.Add(Wizyta);
             await _context.SaveChangesAsync();
 
