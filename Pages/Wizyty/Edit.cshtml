@@ -16,21 +16,21 @@
             <input type="hidden" asp-for="Wizyta.WizytaId" />
             <div class="form-group">
                 <label class="control-label">Pacjent: </label>
-                <select name="PacjentId" asp-items="Model.Pacjent_Options"></select>
+                <p><select name="PacjentId" asp-items="Model.Pacjent_Options"></select></p>
                 <span asp-validation-for="Wizyta.PacjentId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">Stomatolog: </label>
-                <select name="StomatologId" asp-items="Model.Stomatolog_Options"></select>
+                <p><select name="StomatologId" asp-items="Model.Stomatolog_Options"></select></p>
                 <span asp-validation-for="Wizyta.StomatologId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">Asystent: </label>
-                <select name="AsystentId" asp-items="Model.Asystent_Options"></select>
+                <p><select name="AsystentId" asp-items="Model.Asystent_Options"></select></p>
                 <span asp-validation-for="Wizyta.AsystentId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Wizyta.DataGodzina" class="control-label"></label>
+                <label asp-for="Wizyta.DataGodzina" class="control-label">Data i godzina:</label>
                 <input asp-for="Wizyta.DataGodzina" class="form-control" />
                 <span asp-validation-for="Wizyta.DataGodzina" class="text-danger"></span>
             </div>
