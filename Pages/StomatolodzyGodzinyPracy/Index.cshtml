@@ -1,0 +1,46 @@
+﻿@page
+@model projekt_SBD.Pages.StomatolodzyGodzinyPracy.IndexModel
+
+@{
+    ViewData["Title"] = "Godziny pracy";
+}
+
+<h1>Godziny pracy stomatologów</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Kiedy
+            </th>
+            <th>
+                Początek
+            </th>
+            <th>
+                Koniec
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.StomatologGodzinyPracy) {
+        <tr>
+            <td>
+                @Model.GetPoczatekDzien(item.ZmianaId)
+            </td>
+            <td>
+                @Model.GetPoczatekGodzina(item.ZmianaId)
+            </td>
+            <td>
+                @Model.GetKoniecGodzina(item.ZmianaId)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ZmianaId">Edytuj</a> |
+                <a asp-page="./Details" asp-route-id="@item.ZmianaId">Szczegóły</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ZmianaId">Usuń</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

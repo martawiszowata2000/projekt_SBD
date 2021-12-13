@@ -1,0 +1,41 @@
+﻿@page
+@model projekt_SBD.Pages.StomatolodzyGodzinyPracy.CreateModel
+
+@{
+    ViewData["Title"] = "Dodawanie";
+}
+
+<h1>Dodaj nowe godziny pracy</h1>
+
+<h4>Stomatolog</h4>
+<h4>@Model.stomatologSurnameName</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="stomatolog.StomatologId" />
+            <div class="form-group">
+                <label asp-for="StomatologGodzinyPracy.Poczatek" class="control-label"></label>
+                <input asp-for="StomatologGodzinyPracy.Poczatek" class="form-control" />
+                <span asp-validation-for="StomatologGodzinyPracy.Poczatek" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StomatologGodzinyPracy.Koniec" class="control-label"></label>
+                <input asp-for="StomatologGodzinyPracy.Koniec" class="form-control" />
+                <span asp-validation-for="StomatologGodzinyPracy.Koniec" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Dodaj" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="/Stomatolodzy/Index">Powrót</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

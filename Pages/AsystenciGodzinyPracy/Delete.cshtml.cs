@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using projekt_SBD.Data;
 using projekt_SBD.Models;
 
-namespace projekt_SBD.Pages.Wizyty
+namespace projekt_SBD.Pages.AsystenciGodzinyPracy
 {
     public class DeleteModel : PageModel
     {
@@ -20,7 +20,7 @@ namespace projekt_SBD.Pages.Wizyty
         }
 
         [BindProperty]
-        public Wizyta Wizyta { get; set; }
+        public AsystentGodzinyPracy AsystentGodzinyPracy { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,9 +29,9 @@ namespace projekt_SBD.Pages.Wizyty
                 return NotFound();
             }
 
-            Wizyta = await _context.Wizyty.FirstOrDefaultAsync(m => m.WizytaId == id);
+            AsystentGodzinyPracy = await _context.AsystenciGodzinyPracy.FirstOrDefaultAsync(m => m.ZmianaId == id);
 
-            if (Wizyta == null)
+            if (AsystentGodzinyPracy == null)
             {
                 return NotFound();
             }
@@ -45,34 +45,15 @@ namespace projekt_SBD.Pages.Wizyty
                 return NotFound();
             }
 
-            Wizyta = await _context.Wizyty.FindAsync(id);
+            AsystentGodzinyPracy = await _context.AsystenciGodzinyPracy.FindAsync(id);
 
-            if (Wizyta != null)
+            if (AsystentGodzinyPracy != null)
             {
-                _context.Wizyty.Remove(Wizyta);
+                _context.AsystenciGodzinyPracy.Remove(AsystentGodzinyPracy);
                 await _context.SaveChangesAsync();
             }
 
             return RedirectToPage("./Index");
-        }
-
-        public string GetStomatolog(int id)
-        {
-            Stomatolog s = new Stomatolog();
-            s = _context.Stomatolodzy.Where(s => s.StomatologId == id).FirstOrDefault();
-            return $"{s.Imie} {s.Nazwisko}";
-        }
-        public string GetAsystent(int id)
-        {
-            Asystent s = new Asystent();
-            s = _context.Asystenci.Where(s => s.AsystentId == id).FirstOrDefault();
-            return $"{s.Imie} {s.Nazwisko}";
-        }
-        public string GetPacjent(int id)
-        {
-            Pacjent s = new Pacjent();
-            s = _context.Pacjenci.Where(s => s.PacjentId == id).FirstOrDefault();
-            return $"{s.Imie} {s.Nazwisko}";
         }
     }
 }
