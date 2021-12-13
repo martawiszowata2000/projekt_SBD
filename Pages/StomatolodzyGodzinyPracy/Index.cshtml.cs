@@ -8,36 +8,24 @@ using Microsoft.EntityFrameworkCore;
 using projekt_SBD.Data;
 using projekt_SBD.Models;
 
-namespace projekt_SBD.Pages.Stomatolodzy
+namespace projekt_SBD.Pages.StomatolodzyGodzinyPracy
 {
-    public class DetailsModel : PageModel
+    public class IndexModel : PageModel
     {
         private readonly projekt_SBD.Data.AppDbContext _context;
 
-        public DetailsModel(projekt_SBD.Data.AppDbContext context)
+        public IndexModel(projekt_SBD.Data.AppDbContext context)
         {
             _context = context;
         }
 
-        public Stomatolog Stomatolog { get; set; }
-        public IList<StomatologGodzinyPracy> godzinyPracyStomalolodzy { get; set; }
+        public IList<StomatologGodzinyPracy> StomatologGodzinyPracy { get;set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task OnGetAsync()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Stomatolog = await _context.Stomatolodzy.FirstOrDefaultAsync(m => m.StomatologId == id);
-            godzinyPracyStomalolodzy = await _context.StomatolodzyGodzinyPracy.Where(s => s.StomatologId == id).ToListAsync();
-
-            if (Stomatolog == null)
-            {
-                return NotFound();
-            }
-            return Page();
+            StomatologGodzinyPracy = await _context.StomatolodzyGodzinyPracy.ToListAsync();
         }
+
         public string GetPoczatekDzien(int id)
         {
             StomatologGodzinyPracy godzinyPracy = new StomatologGodzinyPracy();
