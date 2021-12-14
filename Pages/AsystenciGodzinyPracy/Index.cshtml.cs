@@ -25,5 +25,24 @@ namespace projekt_SBD.Pages.AsystenciGodzinyPracy
         {
             AsystentGodzinyPracy = await _context.AsystenciGodzinyPracy.ToListAsync();
         }
+
+        public string GetPoczatekDzien(int id)
+        {
+            AsystentGodzinyPracy godzinyPracy = new AsystentGodzinyPracy();
+            godzinyPracy = _context.AsystenciGodzinyPracy.Where(godzinyPracy => godzinyPracy.ZmianaId == id).FirstOrDefault();
+            return $"{godzinyPracy.Poczatek.ToString("D")}";
+        }
+        public string GetPoczatekGodzina(int id)
+        {
+            AsystentGodzinyPracy godzinyPracy = new AsystentGodzinyPracy();
+            godzinyPracy = _context.AsystenciGodzinyPracy.Where(godzinyPracy => godzinyPracy.ZmianaId == id).FirstOrDefault();
+            return $"{godzinyPracy.Poczatek.ToString("t")}";
+        }
+        public string GetKoniecGodzina(int id)
+        {
+            AsystentGodzinyPracy godzinyPracy = new AsystentGodzinyPracy();
+            godzinyPracy = _context.AsystenciGodzinyPracy.Where(godzinyPracy => godzinyPracy.ZmianaId == id).FirstOrDefault();
+            return $"{godzinyPracy.Koniec.ToString("t")}";
+        }
     }
 }

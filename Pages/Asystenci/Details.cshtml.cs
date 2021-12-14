@@ -20,6 +20,7 @@ namespace projekt_SBD.Pages.Asystenci
         }
 
         public Asystent Asystent { get; set; }
+        public IList<AsystentGodzinyPracy> godzinyPracyAsystenci { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,12 +30,31 @@ namespace projekt_SBD.Pages.Asystenci
             }
 
             Asystent = await _context.Asystenci.FirstOrDefaultAsync(m => m.AsystentId == id);
+            godzinyPracyAsystenci = await _context.AsystenciGodzinyPracy.Where(s => s.AsystentId == id).ToListAsync();
 
             if (Asystent == null)
             {
                 return NotFound();
             }
             return Page();
+        }
+        public string GetPoczatekDzien(int id)
+        {
+            AsystentGodzinyPracy godzinyPracy = new AsystentGodzinyPracy();
+            godzinyPracy = _context.AsystenciGodzinyPracy.Where(godzinyPracy => godzinyPracy.ZmianaId == id).FirstOrDefault();
+            return $"{godzinyPracy.Poczatek.ToString("D")}";
+        }
+        public string GetPoczatekGodzina(int id)
+        {
+            AsystentGodzinyPracy godzinyPracy = new AsystentGodzinyPracy();
+            godzinyPracy = _context.AsystenciGodzinyPracy.Where(godzinyPracy => godzinyPracy.ZmianaId == id).FirstOrDefault();
+            return $"{godzinyPracy.Poczatek.ToString("t")}";
+        }
+        public string GetKoniecGodzina(int id)
+        {
+            AsystentGodzinyPracy godzinyPracy = new AsystentGodzinyPracy();
+            godzinyPracy = _context.AsystenciGodzinyPracy.Where(godzinyPracy => godzinyPracy.ZmianaId == id).FirstOrDefault();
+            return $"{godzinyPracy.Koniec.ToString("t")}";
         }
     }
 }

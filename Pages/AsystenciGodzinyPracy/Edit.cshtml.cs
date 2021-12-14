@@ -22,6 +22,9 @@ namespace projekt_SBD.Pages.AsystenciGodzinyPracy
 
         [BindProperty]
         public AsystentGodzinyPracy AsystentGodzinyPracy { get; set; }
+        
+        public Asystent asystent { get; set; }
+        public string asystentSurnameName { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -31,6 +34,10 @@ namespace projekt_SBD.Pages.AsystenciGodzinyPracy
             }
 
             AsystentGodzinyPracy = await _context.AsystenciGodzinyPracy.FirstOrDefaultAsync(m => m.ZmianaId == id);
+
+            AsystentGodzinyPracy = await _context.AsystenciGodzinyPracy.FirstOrDefaultAsync(m => m.ZmianaId == id);
+            asystent = _context.Asystenci.Where(s => s.AsystentId == AsystentGodzinyPracy.AsystentId).FirstOrDefault();
+            asystentSurnameName = asystent.Nazwisko.ToString() + " " + asystent.Imie.ToString();
 
             if (AsystentGodzinyPracy == null)
             {
@@ -66,7 +73,7 @@ namespace projekt_SBD.Pages.AsystenciGodzinyPracy
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Asystenci/Index");
         }
 
         private bool AsystentGodzinyPracyExists(int id)
