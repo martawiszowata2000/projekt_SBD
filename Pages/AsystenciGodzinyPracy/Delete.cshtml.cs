@@ -22,6 +22,13 @@ namespace projekt_SBD.Pages.AsystenciGodzinyPracy
         [BindProperty]
         public AsystentGodzinyPracy AsystentGodzinyPracy { get; set; }
 
+        public Asystent asystent { get; set; }
+        public string asystentSurnameName { get; set; }
+
+        public string poczatekDzienPracy { get; set; }
+        public string poczatekGodzina { get; set; }
+        public string koniecGodzina { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -30,6 +37,13 @@ namespace projekt_SBD.Pages.AsystenciGodzinyPracy
             }
 
             AsystentGodzinyPracy = await _context.AsystenciGodzinyPracy.FirstOrDefaultAsync(m => m.ZmianaId == id);
+
+            asystent = _context.Asystenci.Where(s => s.AsystentId == AsystentGodzinyPracy.AsystentId).FirstOrDefault();
+            asystentSurnameName = asystent.Nazwisko.ToString() + " " + asystent.Imie.ToString();
+
+            poczatekDzienPracy = AsystentGodzinyPracy.Poczatek.ToString("D");
+            poczatekGodzina = AsystentGodzinyPracy.Poczatek.ToString("t");
+            koniecGodzina = AsystentGodzinyPracy.Koniec.ToString("t");
 
             if (AsystentGodzinyPracy == null)
             {
@@ -53,7 +67,7 @@ namespace projekt_SBD.Pages.AsystenciGodzinyPracy
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Asystenci/Index");
         }
     }
 }

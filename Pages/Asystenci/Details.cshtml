@@ -36,3 +36,42 @@
     <a asp-page="./Edit" asp-route-id="@Model.Asystent.AsystentId">Edytuj</a> |
     <a asp-page="./Index">Powrót</a>
 </div>
+<br />
+<br />
+<a asp-page="/AsystenciGodzinyPracy/Create" asp-route-id="@Model.Asystent.AsystentId">Dodaj</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Kiedy
+            </th>
+            <th>
+                Początek
+            </th>
+            <th>
+                Koniec
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.godzinyPracyAsystenci)
+        {
+            <tr>
+                <td>
+                    @Model.GetPoczatekDzien(item.ZmianaId)
+                </td>
+                <td>
+                    @Model.GetPoczatekGodzina(item.ZmianaId)
+                </td>
+                <td>
+                    @Model.GetKoniecGodzina(item.ZmianaId)
+                </td>
+                <td>
+                    <a asp-page="/AsystenciGodzinyPracy/Edit" asp-route-id="@item.ZmianaId">Edytuj</a> |
+                    <a asp-page="/AsystenciGodzinyPracy/Details" asp-route-id="@item.ZmianaId">Szczegóły</a> |
+                    <a asp-page="/AsystenciGodzinyPracy/Delete" asp-route-id="@item.ZmianaId">Usuń</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

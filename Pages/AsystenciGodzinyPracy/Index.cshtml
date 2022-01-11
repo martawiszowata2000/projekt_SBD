@@ -2,22 +2,23 @@
 @model projekt_SBD.Pages.AsystenciGodzinyPracy.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Godziny pracy";
 }
 
-<h1>Index</h1>
+<h1>Godziny pracy asystentów</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.AsystentGodzinyPracy[0].Poczatek)
+                Kiedy
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AsystentGodzinyPracy[0].Koniec)
+                Początek
+            </th>
+            <th>
+                Koniec
             </th>
             <th></th>
         </tr>
@@ -26,15 +27,18 @@
 @foreach (var item in Model.AsystentGodzinyPracy) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Poczatek)
+                @Model.GetPoczatekDzien(item.ZmianaId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Koniec)
+                @Model.GetPoczatekGodzina(item.ZmianaId)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ZmianaId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ZmianaId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ZmianaId">Delete</a>
+                @Model.GetKoniecGodzina(item.ZmianaId)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ZmianaId">Edytuj</a> |
+                <a asp-page="./Details" asp-route-id="@item.ZmianaId">Szczegóły</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ZmianaId">Usuń</a>
             </td>
         </tr>
 }
